@@ -35,8 +35,7 @@ new Product("wine-glass", './imgdir/wine-glass.jpg', 0, 0);
 
 function createRandomImages() {
     if(allProducts.length < imagesDisplayedOnScreen) {
-        allProducts = allProducts.concat(displayedProducts);
-        displayedProducts = [];
+        resetArrays();
     }
     for(var i=0; i < imagesDisplayedOnScreen; i++) {
         var image = document.createElement('img');
@@ -59,8 +58,29 @@ function clearImages() {
     imageBox.innerHTML = '';
 }
 
+function resetArrays() {
+    allProducts = allProducts.concat(displayedProducts);
+    displayedProducts = [];
+}
+
 function handleRandomize(event) {
     event.preventDefault();
+
+    if(userClicks === 25) {
+        clearImages();
+        alert("Out of clicks");
+        imageBox.removeEventListener('click', handleRandomize);
+        resetArrays();
+        var results = document.getElementById('results');
+        for(var i=0; i < allProducts.length; i++) {
+            var liEl = document.createElement('li');
+            liEl.textContent=allProducts[i].name + ' was clicked ' + allProducts[i].clicked + ' times, after being displayed ' + allProducts[i].displayed + ' times.';
+            results.appendChild(liEl);
+        }
+    }
+
+    userClicks += 1;
+
     for(var i=0; i < displayedProducts.length; i++) {
         if(event.target.id === displayedProducts[i].name) {
             displayedProducts[i].clicked += 1;
