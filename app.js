@@ -1,10 +1,12 @@
 var imageBox = document.getElementById('imageContainer');
+var startSurvey = document.getElementById('startSurvey');
 
 var userClicks = 0;
 var imagesDisplayedOnScreen = 3;
 
 var allProducts = [];
 var displayedProducts = [];
+
 
 function Product(name, src, displayed, clicked) {
     this.name = name;
@@ -33,10 +35,14 @@ new Product("unicorn", './imgdir/unicorn.jpg', 0, 0);
 new Product("water-can", './imgdir/water-can.jpg', 0, 0);
 new Product("wine-glass", './imgdir/wine-glass.jpg', 0, 0);
 
+
+
 function createRandomImages() {
+
     if(allProducts.length < imagesDisplayedOnScreen) {
         resetArrays();
     }
+
     for(var i=0; i < imagesDisplayedOnScreen; i++) {
         var image = document.createElement('img');
         var randomIndex = Math.floor(Math.random() * allProducts.length);
@@ -52,15 +58,21 @@ function createRandomImages() {
     return;
 }
 
-createRandomImages();
 
 function clearImages() {
     imageBox.innerHTML = '';
 }
 
+
+
 function resetArrays() {
     allProducts = allProducts.concat(displayedProducts);
     displayedProducts = [];
+}
+
+function handleStart() {
+    createRandomImages();
+    startSurvey.innerHTML = '';
 }
 
 function handleRandomize(event) {
@@ -77,10 +89,10 @@ function handleRandomize(event) {
             liEl.textContent=allProducts[i].name + ' was clicked ' + allProducts[i].clicked + ' times, after being displayed ' + allProducts[i].displayed + ' times.';
             results.appendChild(liEl);
         }
+        return;
     }
 
     userClicks += 1;
-
     for(var i=0; i < displayedProducts.length; i++) {
         if(event.target.id === displayedProducts[i].name) {
             displayedProducts[i].clicked += 1;
@@ -90,5 +102,8 @@ function handleRandomize(event) {
         }
     }
 }
+
+
+startSurvey.addEventListener('click', handleStart);
 
 imageBox.addEventListener('click', handleRandomize);

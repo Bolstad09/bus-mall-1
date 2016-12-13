@@ -1,7 +1,20 @@
 * {
-    border: thin solid;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: Roboto;
 }
 
 img {
     width: 200px
+}
+
+#startSurvey {
+text-align: center;
+}
+
+#start {
+    padding: 0.7em;
+    font-size: 1.5em;
 }
