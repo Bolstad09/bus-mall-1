@@ -21,5 +21,6 @@
 * I want to build a constructor function that takes the product images as instances.
 * I want an event listener that does not include "bad clicks" in my tally of clicks.
 * I want to store user data that does not reset when the same user visits again
+* As a student I want to show my understanding of previous javascript concepts by utilizing previously learned tools and showcasing my CSS skills
 
 ---
