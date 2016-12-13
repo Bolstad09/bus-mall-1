@@ -83,12 +83,13 @@ function handleRandomize(event) {
         alert("Out of clicks");
         imageBox.removeEventListener('click', handleRandomize);
         resetArrays();
-        var results = document.getElementById('results');
-        for(var i=0; i < allProducts.length; i++) {
-            var liEl = document.createElement('li');
-            liEl.textContent=allProducts[i].name + ' was clicked ' + allProducts[i].clicked + ' times, after being displayed ' + allProducts[i].displayed + ' times.';
-            results.appendChild(liEl);
-        }
+
+        var resultsButtonHere = document.getElementById('resultsButtonHere')
+        var resultButton = document.createElement('button');
+        resultButton.type = 'submit';
+        resultButton.textContent = 'Show Results';
+        resultsButtonHere.appendChild(resultButton);
+        resultsButtonHere.addEventListener('click', showResults)
         return;
     }
 
@@ -102,6 +103,18 @@ function handleRandomize(event) {
         }
     }
 }
+
+function showResults(event){
+    event.preventDefault()
+    var results = document.getElementById('results');
+    resultsButtonHere.innerHTML = '';
+    for(var i=0; i < allProducts.length; i++) {
+        var liEl = document.createElement('li');
+        liEl.textContent=allProducts[i].name + ' was clicked ' + allProducts[i].clicked + ' times, after being displayed ' + allProducts[i].displayed + ' times.';
+        results.appendChild(liEl);
+    }
+}
+
 
 
 startSurvey.addEventListener('click', handleStart);
