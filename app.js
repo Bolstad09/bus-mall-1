@@ -1,8 +1,10 @@
 var imageBox = document.getElementById('imageContainer');
 
 var userClicks = 0;
+var imagesDisplayedOnScreen = 3;
 
 var allProducts = [];
+var displayedProducts = [];
 
 function Product(name, src, displayed, clicked) {
     this.name = name;
@@ -10,7 +12,7 @@ function Product(name, src, displayed, clicked) {
     this.displayed = displayed;
     this.clicked = clicked;
     allProducts.push(this);
-};
+}
 
 new Product("bag", './imgdir/bag.jpg', 0, 0);
 new Product("banana", './imgdir/banana.jpg', 0, 0);
@@ -30,18 +32,25 @@ new Product("tauntaun", './imgdir/tauntaun.jpg', 0, 0);
 new Product("unicorn", './imgdir/unicorn.jpg', 0, 0);
 new Product("water-can", './imgdir/water-can.jpg', 0, 0);
 new Product("wine-glass", './imgdir/wine-glass.jpg', 0, 0);
-console.log(allProducts);
-
 
 function createRandomImages() {
-    for(var i=0; i < 3; i++) {
-        var image = document.createElement('img')
-        var randomIndex = Math.floor(Math.random() * allProducts.length);
-        image.src = allProducts[randomIndex].src
-        image.id = allProducts[randomIndex].name
-        imageContainer.appendChild(image);
-        console.log(image)
+    if(allProducts.length < imagesDisplayedOnScreen) {
+        allProducts = allProducts.concat(displayedProducts);
+        displayedProducts = [];
     }
+    for(var i=0; i < imagesDisplayedOnScreen; i++) {
+        var image = document.createElement('img');
+        var randomIndex = Math.floor(Math.random() * allProducts.length);
+        image.src = allProducts[randomIndex].src;
+        image.id = allProducts[randomIndex].name;
+        imageContainer.appendChild(image);
+        allProducts[randomIndex].displayed += 1;
+        displayedProducts.push(allProducts[randomIndex]);
+        allProducts.splice(randomIndex, 1);
+    }
+    console.log(allProducts);
+    console.log(displayedProducts);
+    return;
 }
 
 createRandomImages();
@@ -52,9 +61,9 @@ function clearImages() {
 
 function handleRandomize(event) {
     event.preventDefault();
-    for(var i=0; i < allProducts.length; i++) {
-        if(event.target.id === allProducts[i].name) {
-            allProducts[i].clicked += 1;
+    for(var i=0; i < displayedProducts.length; i++) {
+        if(event.target.id === displayedProducts[i].name) {
+            displayedProducts[i].clicked += 1;
             clearImages();
             createRandomImages();
             break;
@@ -62,13 +71,4 @@ function handleRandomize(event) {
     }
 }
 
-//tally click
-//clear old images
-//get three new images
-//prevent duplicates
-//alert bad clicks (bad clicks don't add to total clicks)
-//total clicks < 25
-//if over 25, remove event listener
-//show button for lists
-
-imageBox.addEventListener('click', handleRandomize)
+imageBox.addEventListener('click', handleRandomize);
