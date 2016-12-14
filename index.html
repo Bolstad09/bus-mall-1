@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
         <link href="style.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <title></title>
@@ -9,21 +10,29 @@
 
     <body>
 
-        <h1></h1>
+        <div>
+            <h1>Welcome to Bus-Mall's start-up product Survey!</h1>
 
-        <p></p>
+            <p>Please select 25 items from the groups of products that you
+                think you would be most likely to purchse.</p>
+        </div>
+
+
 
         <form id="startSurvey">
             <button id="start" type="submit"><strong>Start Survey</strong></button>
         </form>
 
-        <form id="resultsButtonHere"></form>
+        <div id="imageContainer"></div>
 
-        <div id="imageContainer">
-        </div>
-
-        <ul id="results">
+        <form id="resultsListButtonHere"></form>
+        <ul id="resultsList">
         </ul>
+
+        <form id="chartButtonHere"></form>
+        <canvas id="results" width="600" height="400"></canvas>
+
+
 
         <script src = app.js></script>
     </body>

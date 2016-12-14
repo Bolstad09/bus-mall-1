@@ -6,15 +6,26 @@
     font-family: Roboto;
 }
 
-img {
-    width: 200px
+
+h1, p {
+    text-align: center;
+    margin: 2em;
 }
 
-#startSurvey {
+
+img {
+    width: 20%;
+    margin: 1em;
+    border: medium solid;
+    border-radius: 0.6em;
+}
+
+#startSurvey, #resultsButtonHere, #imageContainer {
 text-align: center;
 }
 
-#start {
+
+button {
     padding: 0.7em;
     font-size: 1.5em;
 }
