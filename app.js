@@ -65,6 +65,12 @@ function createRandomImages() {
         displayedProducts.push(allProducts[randomIndex]);
         allProducts.splice(randomIndex, 1);
     }
+    
+    if(userClicks === 25) {
+        endSurvey();
+        return;
+    }
+
     return;
 }
 
@@ -89,11 +95,6 @@ function handleRandomize(event) {
         return;
     }
 
-    if(userClicks === 25) {
-        endSurvey();
-        return;
-    }
-
     userClicks += 1;
     for(var i=0; i < displayedProducts.length; i++) {
         if(event.target.id === displayedProducts[i].name) {
@@ -104,8 +105,6 @@ function handleRandomize(event) {
         }
     }
 }
-
-
 
 
 function endSurvey(){
@@ -122,6 +121,7 @@ function endSurvey(){
 
     var resultsListButtonHere = document.getElementById('resultsListButtonHere');
     var resultListButton = document.createElement('button');
+        resultListButton.id = 'resultListButton' //for styling purposes
         resultListButton.type = 'submit';
         resultListButton.textContent = 'Show list Results';
         resultsListButtonHere.appendChild(resultListButton);
@@ -129,6 +129,7 @@ function endSurvey(){
 
     var chartButtonHere = document.getElementById('chartButtonHere');
     var chartButton = document.createElement('button');
+        chartButton.id = 'chartButton'
         chartButton.type = 'submit';
         chartButton.textContent = 'Show Chart Results';
         chartButtonHere.appendChild(chartButton);
