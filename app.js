@@ -20,24 +20,6 @@ function Product(name, src, displayed, clicked) {
     productNames.push(this.name);
 }
 
-new Product("bag", './imgdir/bag.jpg', 0, 0);
-new Product("banana", './imgdir/banana.jpg', 0, 0);
-new Product("bathroom", './imgdir/bathroom.jpg', 0, 0);
-new Product("boots", './imgdir/boots.jpg', 0, 0);
-new Product("breakfast", './imgdir/breakfast.jpg', 0, 0);
-new Product("bubblegum", './imgdir/bubblegum.jpg', 0, 0);
-new Product("chair", './imgdir/chair.jpg', 0, 0);
-new Product("cthulhu", './imgdir/cthulhu.jpg', 0, 0);
-new Product("duckDog", './imgdir/dog-duck.jpg', 0, 0);
-new Product("dragon", './imgdir/dragon.jpg', 0, 0);
-new Product("pen", './imgdir/pen.jpg', 0, 0);
-new Product("pet-sweep", './imgdir/pet-sweep.jpg', 0, 0);
-new Product("scissors", './imgdir/scissors.jpg', 0, 0);
-new Product("shark", './imgdir/shark.jpg', 0, 0);
-new Product("tauntaun", './imgdir/tauntaun.jpg', 0, 0);
-new Product("unicorn", './imgdir/unicorn.jpg', 0, 0);
-new Product("water-can", './imgdir/water-can.jpg', 0, 0);
-new Product("wine-glass", './imgdir/wine-glass.jpg', 0, 0);
 
 
 function handleStart() {
@@ -65,10 +47,12 @@ function createRandomImages() {
         displayedProducts.push(allProducts[randomIndex]);
         allProducts.splice(randomIndex, 1);
     }
-    
+
     if(userClicks === 25) {
         endSurvey();
+        localStorage.setItem('allProducts', JSON.stringify(allProducts));
         return;
+
     }
 
     return;
@@ -168,6 +152,34 @@ function showChartResults(event){
     var resultChart = new Chart(results).Bar(barData);
 }
 
+
+
+if (localStorage.allProducts){
+  var retrieveStorage = localStorage.getItem('allProducts');
+  allProducts = JSON.parse(retrieveStorage);
+  console.table(JSON.parse(retrieveStorage));
+}
+else{
+  new Product("bag", './imgdir/bag.jpg', 0, 0);
+  new Product("banana", './imgdir/banana.jpg', 0, 0);
+  new Product("bathroom", './imgdir/bathroom.jpg', 0, 0);
+  new Product("boots", './imgdir/boots.jpg', 0, 0);
+  new Product("breakfast", './imgdir/breakfast.jpg', 0, 0);
+  new Product("bubblegum", './imgdir/bubblegum.jpg', 0, 0);
+  new Product("chair", './imgdir/chair.jpg', 0, 0);
+  new Product("cthulhu", './imgdir/cthulhu.jpg', 0, 0);
+  new Product("duckDog", './imgdir/dog-duck.jpg', 0, 0);
+  new Product("dragon", './imgdir/dragon.jpg', 0, 0);
+  new Product("pen", './imgdir/pen.jpg', 0, 0);
+  new Product("pet-sweep", './imgdir/pet-sweep.jpg', 0, 0);
+  new Product("scissors", './imgdir/scissors.jpg', 0, 0);
+  new Product("shark", './imgdir/shark.jpg', 0, 0);
+  new Product("tauntaun", './imgdir/tauntaun.jpg', 0, 0);
+  new Product("unicorn", './imgdir/unicorn.jpg', 0, 0);
+  new Product("water-can", './imgdir/water-can.jpg', 0, 0);
+  new Product("wine-glass", './imgdir/wine-glass.jpg', 0, 0);
+ localStorage.setItem('allProducts', JSON.stringify(allProducts));
+}
 
 startSurvey.addEventListener('click', handleStart);
 
